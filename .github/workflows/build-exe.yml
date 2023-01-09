@@ -61,10 +61,8 @@ jobs:
       - name: Conditionally Enable sccache
         shell: bash
         run: |
-          if [ -n "${AWS_SECRET_ACCESS_KEY}" ]; then
-            echo "enabling sccache"
-            echo "RUSTC_WRAPPER=sccache" >> $GITHUB_ENV
-          fi
+          echo "enabling sccache"
+          echo "RUSTC_WRAPPER=sccache" >> $GITHUB_ENV
 
       - uses: ./.github/actions/rust-bootstrap
         with:
