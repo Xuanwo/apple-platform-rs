@@ -45,6 +45,13 @@ jobs:
           echo "enabling sccache"
           echo "RUSTC_WRAPPER=sccache" >> $GITHUB_ENV
 
+      - name: Configure Cache Env
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+            core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+
       - uses: ./.github/actions/rust-bootstrap
         with:
           rust_toolchain: ${{ matrix.rust_toolchain }}
