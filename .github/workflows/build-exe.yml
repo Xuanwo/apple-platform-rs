@@ -31,34 +31,30 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - os: 'ubuntu-22.04'
-            triple: 'aarch64-unknown-linux-musl'
+          - os: "ubuntu-22.04"
+            triple: "aarch64-unknown-linux-musl"
             cross: true
-          - os: 'ubuntu-22.04'
-            triple: 'x86_64-unknown-linux-musl'
-          - os: 'macos-11'
-            triple: 'aarch64-apple-darwin'
-          - os: 'macos-11'
-            triple: 'x86_64-apple-darwin'
-          - os: 'windows-2022'
-            triple: 'i686-pc-windows-msvc'
-          - os: 'windows-2022'
-            triple: 'x86_64-pc-windows-msvc'
+          - os: "ubuntu-22.04"
+            triple: "x86_64-unknown-linux-musl"
+          - os: "macos-11"
+            triple: "aarch64-apple-darwin"
+          - os: "macos-11"
+            triple: "x86_64-apple-darwin"
+          - os: "windows-2022"
+            triple: "i686-pc-windows-msvc"
+          - os: "windows-2022"
+            triple: "x86_64-pc-windows-msvc"
     runs-on: ${{ matrix.target.os }}
     env:
-      IN_CI: '1'
-      AWS_REGION: us-west-2
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      SCCACHE_BUCKET: 'apple-platform-rs-sccache'
-      SCCACHE_S3_USE_SSL: '1'
+      IN_CI: "1"
       # Prevent sccache server from stopping due to inactivity.
-      SCCACHE_IDLE_TIMEOUT: '0'
-      CARGO_INCREMENTAL: '0'
+      SCCACHE_IDLE_TIMEOUT: "0"
+      SCCACHE_GHA_VERSION: "sccache"
+      CARGO_INCREMENTAL: "0"
       # This forces the lzma-sys crate to link liblzma statically. Ideally we'd do
       # this with a crate feature. But the xz2 crate didn't expose that feature at the
       # time this workaround was introduced.
-      LZMA_API_STATIC: '1'
+      LZMA_API_STATIC: "1"
     steps:
       - uses: actions/checkout@v3
 
@@ -133,7 +129,7 @@ jobs:
   macos-universal:
     needs:
       - build
-    runs-on: 'macos-11'
+    runs-on: "macos-11"
     steps:
       - uses: actions/checkout@v3
         with:

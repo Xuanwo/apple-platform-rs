@@ -3,10 +3,10 @@ on:
     branches:
       - main
     tags-ignore:
-      - '**'
+      - "**"
   pull_request:
   schedule:
-    - cron: '12 15 * * *'
+    - cron: "12 15 * * *"
   workflow_dispatch:
 jobs:
   build-and-test:
@@ -14,32 +14,28 @@ jobs:
       fail-fast: false
       matrix:
         rust_toolchain:
-          - 'stable'
-          - 'beta'
-          - 'nightly'
-          - '1.62.1'
+          - "stable"
+          - "beta"
+          - "nightly"
+          - "1.62.1"
         target:
-          - os: 'ubuntu-22.04'
-            triple: 'x86_64-unknown-linux-gnu'
-          - os: 'macos-11'
-            triple: 'x86_64-apple-darwin'
-          - os: 'macos-12'
-            triple: 'x86_64-apple-darwin'
-          - os: 'windows-2022'
-            triple: 'x86_64-pc-windows-msvc'
+          - os: "ubuntu-22.04"
+            triple: "x86_64-unknown-linux-gnu"
+          - os: "macos-11"
+            triple: "x86_64-apple-darwin"
+          - os: "macos-12"
+            triple: "x86_64-apple-darwin"
+          - os: "windows-2022"
+            triple: "x86_64-pc-windows-msvc"
     continue-on-error: ${{ matrix.rust_toolchain == 'nightly' }}
     runs-on: ${{ matrix.target.os }}
     env:
-      IN_CI: '1'
-      AWS_REGION: us-west-2
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      CARGO_INCREMENTAL: '0'
+      IN_CI: "1"
+      CARGO_INCREMENTAL: "0"
       CARGO_TERM_COLOR: always
-      SCCACHE_BUCKET: 'apple-platform-rs-sccache'
-      SCCACHE_S3_USE_SSL: '1'
+      SCCACHE_GHA_VERSION: "sccache"
       # Prevent sccache server from stopping due to inactivity.
-      SCCACHE_IDLE_TIMEOUT: '0'
+      SCCACHE_IDLE_TIMEOUT: "0"
     steps:
       - uses: actions/checkout@v3
 
