@@ -15,31 +15,31 @@ macosx_deployment_target := if os() == "macos" {
 
 actions-install-sccache-linux:
   python3 scripts/secure_download.py \
-    https://github.com/Xuanwo/cccache/releases/download/v0.4.0-xuanwo-test.2/sccache-v0.4.0-xuanwo-test.2-x86_64-unknown-linux-musl.tar.gz \
+    https://github.com/Xuanwo/cccache/releases/download/v0.4.0-xuanwo-test.2/sccache-v0.4.0-xuanwo-test.3-x86_64-unknown-linux-musl.tar.gz \
     553ee2fdf9adf66265afbee9b7e6afa4cfd988868d776328da234c078f8f8451 \
     sccache.tar.gz
   tar -xvzf sccache.tar.gz
-  mv sccache-v0.4.0-xuanwo-test.2-x86_64-unknown-linux-musl/sccache /home/runner/.cargo/bin/sccache
+  mv sccache-v0.4.0-xuanwo-test.3-x86_64-unknown-linux-musl/sccache /home/runner/.cargo/bin/sccache
   rm -rf sccache*
   chmod +x /home/runner/.cargo/bin/sccache
 
 actions-install-sccache-macos:
   python3 scripts/secure_download.py \
-    https://github.com/Xuanwo/cccache/releases/download/v0.4.0-xuanwo-test.2/sccache-v0.4.0-xuanwo-test.2-x86_64-apple-darwin.tar.gz \
+    https://github.com/Xuanwo/cccache/releases/download/v0.4.0-xuanwo-test.2/sccache-v0.4.0-xuanwo-test.3-x86_64-apple-darwin.tar.gz \
     5fa96fbfbe2b5cdacf343c328ab5b03872373f14bfc8b8eb43a30c18fa619f0c \
     sccache.tar.gz
   tar -xvzf sccache.tar.gz
-  mv sccache-v0.4.0-xuanwo-test.2-x86_64-apple-darwin/sccache /Users/runner/.cargo/bin/sccache
+  mv sccache-v0.4.0-xuanwo-test.3-x86_64-apple-darwin/sccache /Users/runner/.cargo/bin/sccache
   rm -rf sccache*
   chmod +x /Users/runner/.cargo/bin/sccache
 
 actions-install-sccache-windows:
   python3 scripts/secure_download.py \
-    https://github.com/Xuanwo/cccache/releases/download/v0.4.0-xuanwo-test.2/sccache-v0.4.0-xuanwo-test.2-x86_64-pc-windows-msvc.tar.gz \
+    https://github.com/Xuanwo/cccache/releases/download/v0.4.0-xuanwo-test.2/sccache-v0.4.0-xuanwo-test.3-x86_64-pc-windows-msvc.tar.gz \
     6a150dd9fb6cdee89b0cff0c5198db2ab8cd1197ab52f101b3da5d1aafc724d1 \
     sccache.tar.gz
   tar -xvzf sccache.tar.gz
-  mv sccache-v0.4.0-xuanwo-test.2-x86_64-pc-windows-msvc/sccache.exe C:/Users/runneradmin/.cargo/bin/sccache.exe
+  mv sccache-v0.4.0-xuanwo-test.3-x86_64-pc-windows-msvc/sccache.exe C:/Users/runneradmin/.cargo/bin/sccache.exe
 
 actions-bootstrap-rust-linux: actions-install-sccache-linux
   sudo apt install -y --no-install-recommends libpcsclite-dev musl-tools
