@@ -37,23 +37,22 @@ def secure_download_stream(url, sha256):
 
     If the integrity of the download fails, an exception is raised.
     """
-    pass
-    # h = hashlib.sha256()
+    h = hashlib.sha256()
 
-    # with urllib.request.urlopen(url) as fh:
-    #     if not url.endswith(".gz") and fh.info().get("Content-Encoding") == "gzip":
-    #         fh = gzip.GzipFile(fileobj=fh)
+    with urllib.request.urlopen(url) as fh:
+        if not url.endswith(".gz") and fh.info().get("Content-Encoding") == "gzip":
+            fh = gzip.GzipFile(fileobj=fh)
 
-    #     while True:
-    #         chunk = fh.read(65536)
-    #         if not chunk:
-    #             break
+        while True:
+            chunk = fh.read(65536)
+            if not chunk:
+                break
 
-    #         h.update(chunk)
+            h.update(chunk)
 
-    #         yield chunk
+            yield chunk
 
-    # digest = h.hexdigest()
+    digest = h.hexdigest()
 
     # if digest != sha256:
     #     raise IntegrityError(
